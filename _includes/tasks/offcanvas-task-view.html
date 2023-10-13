@@ -1,0 +1,37 @@
+<div class="offcanvas offcanvas-end offcanvas-lg-50 shadow {% if page.offcanvasTaskViewShow %}show{% else %}{% endif %}" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-body p-5">
+    {% include tasks/task-details.html %}
+    <hr class="mt-5 mb-3 opacity-25">
+    <!-- START Section Files -->
+    <div class="mb-5">
+        {% include V2/header-small.html
+            headerSmallIcon="paperclip"
+            headerSmallTitle="Files"
+        %}
+
+        <!-- Attachments -->
+        <div class="d-flex gap-3">
+          {% include tasks/subtask/files.html %}
+        </div>
+
+    </div>
+    <!-- END Section Files -->
+
+    <hr class="mt-5 mb-3 opacity-25">
+    <div class="mb-3">
+
+      {% include V2/header-small.html
+        headerSmallButton="true"
+          headerSmallIcon="list"
+          headerSmallTitle="Subtasks"
+      %}
+
+      {% include tasks/subtask/card-subtask.html %}
+    </div>
+
+    {% include tasks/subtask/table-subtasks.html %}
+  </div>
+  <div class="card-footer border-0 d-flex justify-content-end p-4">
+    <button type="button" class="btn btn-link text-decoration-none px-3">Edit this Task</button>
+  </div>
+</div>

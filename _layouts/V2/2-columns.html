@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html data-bs-theme="light">
+
+<head>
+	<meta charset="utf-8">
+	<title>{{ site.title }} - {{ page.title }}</title>
+
+	<!-- Font Awesome 6.x -->
+	<script src="https://kit.fontawesome.com/2b04deb584.js" crossorigin="anonymous"></script>
+
+	<!-- Generated from SCSS (Bootstrap 5.02 and saved as styles.css)-->
+	<link href="{{page.root}}/css/styles.css" rel="stylesheet">
+	<script type="module" src="{{page.root}}/js/color-modes.js"></script>
+
+	<!-- Google Fonts Roboto -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{{page.root}}/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{page.root}}/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{page.root}}/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<meta name="msapplication-config" content="/browserconfig.xml" />
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body class="vh-100 fixed-top">
+	<div class="container-fluid px-0">
+		<div class="row g-0">
+			<!-- START SIDEBAR -->
+			{% include layouts/slim-sidebar.html %}
+			<!-- END SIDEBAR -->
+
+			<!-- START LIST -->
+			<div
+				class="col-xl-3 col-xxl-3 col-md-4 shadow-sm border-end vh-100">
+				{% if page.navbarListDisabled %}
+				{% else %}
+					{% include V2/navbar-list.html %}
+				{% endif %}
+
+				{% if page.navbarFiltersDisabled %}
+				{% else %}
+					{% include V2/navbar-filters.html %}
+				{% endif %}
+
+				<div class="table-responsive">
+					{% if page.tableTasksGroup %} 
+						{% include V2/table-tasks-group.html %}
+					{% elsif page.settingsMenu %}
+						{% include settings/pills-settings.html %} 
+					{% elsif page.gridTasksGroup %} 
+						<div class="row row-cols-1 g-3 p-3 overflow-auto vh-100">
+							<div class="col">
+								{% include tasks/card-task.html 
+									important=""
+									finished="" 
+								%}
+							</div>
+							<div class="col">
+								{% include tasks/card-task.html 
+									high=""
+									backlog="" 
+								%}
+							</div>
+							<div class="col">
+								{% include tasks/card-task.html 
+									normal=""
+									rejected="" 
+								%}
+							</div>
+							<div class="col">
+								{% include tasks/card-task.html 
+									low=""
+									doing="" 
+								%}
+							</div>
+							<div class="col">
+								{% include tasks/card-task.html 
+									important=""
+									finished="" 
+								%}
+							</div>
+							<div class="col">
+								{% include tasks/card-task.html 
+									high=""
+									backlog="" 
+								%}
+							</div>
+						</div>
+					{% elsif page.listGridTasksGroup %} 
+						<div class="p-0">
+							{% include V2/collapse-group-grid.html 
+								collapseLink="collapseExample"
+								collapseIconColor="warning"
+								collapseGroupTitle="High"
+							%}
+							<!-- START Cards 1 -->
+							<div class="collapse show container py-3" id="collapseExample">  
+								<div class="row row-cols-1 g-3">
+									<div class="col">
+										{% include tasks/card-task.html 
+											important=""
+											finished="" 
+										%}
+									</div>
+									<div class="col">
+										{% include tasks/card-task.html 
+											high=""
+											backlog="" 
+										%}
+									</div>
+								</div>
+							</div>
+							<!-- END Cards 1 -->
+						
+							{% include V2/collapse-group-grid.html 
+								collapseLink="collapseExample2"
+								collapseIconColor="danger"
+								collapseGroupTitle="Important"
+							%}
+
+							{% include V2/collapse-group-grid.html 
+								collapseLink="collapseExample3"
+								collapseIconColor="primary"
+								collapseGroupTitle="Normal"
+							%}
+
+							{% include V2/collapse-group-grid.html 
+								collapseLink="collapseExample4"
+								collapseIconColor="secondary"
+								collapseGroupTitle="Low"
+							%}
+						
+						</div>
+					{% elsif page.tasksListTableEmpty %}
+						<div class="overflow-auto vh-100 d-flex justify-content-center flex-column align-items-center">
+							<div class="text-center">
+								<!-- Include empty placholder -->
+								{% include empty-placeholder.html 
+									emptyTask=""
+								%}
+							</div>
+						</div>		
+					{% else %}
+						<div class="overflow-auto vh-100">
+							{% include V2/table-tasks.html %}
+						</div>
+					{% endif %}
+				</div>
+
+			</div>
+			<!-- END LIST -->
+		
+			{{ content }}
+			
+		</div>
+
+	</div>
+
+
+	<!-- Modal: Create New Tag -->
+	{% include tasks/modal-select-users.html %}
+
+	<!-- Offcanvas: Create Task -->
+	{% include tasks/offcanvas-create-task.html %}
+
+	<!-- Offcanvas: Task View  -->
+	{% include tasks/offcanvas-task-view.html %}
+
+	<!-- Modal: Create Project -->
+	{% include modals/modal-create-project.html %}
+
+	<!-- Modal: Create New Team -->
+	{% include modals/modal-create-team.html %}
+
+	<!-- Modal: Edit Payments -->
+	{% include modals/modal-edit-payments.html %}
+
+	<!-- Modal: Add Credit Card -->
+	{% include modals/modal-add-creditcard.html %}
+
+	<!-- Modal: Select Plan -->
+	{% include modals/modal-select-plan.html %}
+
+	<!-- Modal: Danger -->
+	{% if page.modalDangerTasks %}
+	{% include modals/modal-danger.html
+	modalDangerTasks=""
+	%}
+	{% elsif page.modalDangerListTasks %}
+	{% include modals/modal-danger.html
+	modalDangerListTasks=""
+	%}
+	{% else %}
+	{% include modals/modal-danger.html %}
+	{% endif %}
+
+	<!-- Modal: Filter(s) -->
+	{% include modal-filter/modal-filter.html
+	modalName="modalStart"
+	placholderTitle="Filter..."
+	navbarReset=""
+	navbarTitle="Select below"
+	modalFilterBy=""
+	%}
+
+	{% include modal-filter/modal-filter.html
+	inputBack=""
+	inputCheck=""
+	inputClose=""
+	navbarReset=""
+	navbarBadgesAssignee=""
+	modalName="modalAssignee"
+	placholderTitle="Filter by Assignee..."
+	navbarTitle="6 Results"
+	modalAssignee=""
+	%}
+
+	{% include modal-filter/modal-filter.html
+	inputBack=""
+	inputCheck=""
+	navbarReset=""
+	navbarBadgesStatus=""
+	modalName="modalStatus"
+	placholderTitle="Filter by Status..."
+	navbarTitle="16 Results"
+	modalStatusBy=""
+	%}
+
+	{% include modal-filter/modal-filter.html
+	inputBack=""
+	inputCheck=""
+	navbarReset=""
+	navbarBadgesTag=""
+	modalName="modalTags"
+	placholderTitle="Filter by Tag..."
+	navbarTitle="16 Results"
+	modalTagBy=""
+	%}
+
+	{% include modal-filter/modal-filter.html
+	inputBack=""
+	inputCheck=""
+	navbarReset=""
+	navbarBadgesPriority=""
+	modalName="modalPriority"
+	placholderTitle="Filter by Priority..."
+	navbarTitle="26 Results"
+	modalPriorityBy=""
+	%}
+
+	<div class="toast-container position-fixed bottom-0 end-0 p-3">
+		{% include toasts/toast-removed.html %}
+	</div>
+
+	<div class="toast-container position-fixed bottom-0 end-0 p-3">
+		{% include toasts/toast-saved.html %}
+	</div>
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="{{page.root}}/js/holder.min.js"></script>
+
+	<!-- initialize all tooltips on a page -->
+	<script>
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
+	</script>
+
+	<!-- Toast for Remove (Modal: Add Credit Card)-->
+	<script>
+		var toastTrigger = document.getElementById('removeToastBtn')
+		var removeToast = document.getElementById('removeToast')
+		if (toastTrigger) {
+			toastTrigger.addEventListener('click', function () {
+				var toast = new bootstrap.Toast(removeToast)
+
+				toast.show()
+			})
+		}
+	</script>
+
+	<!-- Toast for Save (Modal: Add Credit Card)-->
+	<script>
+		var toastTrigger = document.getElementById('saveToastBtn')
+		var saveToast = document.getElementById('saveToast')
+		if (toastTrigger) {
+			toastTrigger.addEventListener('click', function () {
+				var toast = new bootstrap.Toast(saveToast)
+
+				toast.show()
+			})
+		}
+	</script>
+
+
+</body>
+
+</html>

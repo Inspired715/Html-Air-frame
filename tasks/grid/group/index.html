@@ -1,0 +1,113 @@
+---
+layout: V2/1-column
+title:  'Grid Tasks Group'
+grpApplyGridTasksGroup: 1
+grpNotify: 1
+layoutGridTasksGroup: 1
+fullScreenGridTasksGroup: 1
+---
+<div class="p-0">
+    {% include V2/collapse-group-grid.html 
+        collapseLink="collapseExample"
+        collapseIconColor="warning"
+        collapseGroupTitle="High"
+    %}
+
+    <!-- START Cards 1 -->
+    <div class="container-fluid collapse show py-3"  id="collapseExample">  
+        <div class="row row-cols-1 row-cols-md-6 g-3">
+            <div class="col">
+                {% include tasks/card-task.html 
+                    important=""
+                    finished="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    high=""
+                    backlog="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    normal=""
+                    rejected="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    low=""
+                    doing="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    important=""
+                    finished="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    high=""
+                    backlog="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    normal=""
+                    rejected="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    important=""
+                    finished="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    high=""
+                    backlog="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    normal=""
+                    rejected="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    low=""
+                    doing="" 
+                %}
+            </div>
+            <div class="col">
+                {% include tasks/card-task.html 
+                    important=""
+                    finished="" 
+                %}
+            </div>
+        </div>
+    </div>
+    <!-- END Cards 1 -->
+
+    {% include V2/collapse-group-grid.html 
+        collapseLink="collapseExample2"
+        collapseIconColor="danger"
+        collapseGroupTitle="Important"
+    %}
+
+    {% include V2/collapse-group-grid.html 
+        collapseLink="collapseExample3"
+        collapseIconColor="primary"
+        collapseGroupTitle="Normal"
+    %}
+
+    {% include V2/collapse-group-grid.html 
+        collapseLink="collapseExample4"
+        collapseIconColor="info"
+        collapseGroupTitle="Low"
+    %}
+
+</div>

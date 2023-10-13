@@ -1,0 +1,68 @@
+<table class="table table-hover">
+
+      <!-- TH -->
+      <thead class="text-secondary">
+        <tr>
+          <th scope="col" class="fw-normal border-secondary-subtle">
+            <span class="me-2">
+              <input class="form-check-input ms-2" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+            </span>
+            Group
+          </th>
+          <th scope="col" width="30" class="border-secondary-subtle">
+            <i class="fas fa-fw fa-star ms-2"></i>
+          </th>
+          <th scope="col" class="text-center small fw-normal border-secondary-subtle" width="30">Status</th>
+          <th scope="col" class="small fw-normal border-secondary-subtle">Created</th>
+          <th scope="col" class="small fw-normal border-secondary-subtle">Tags</th>
+          <th scope="col" class="small fw-normal border-secondary-subtle">Assigned</th>
+          <th scope="col" class="text-end border-secondary-subtle"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- TR GROUP -->
+          {% include V2/tr-group.html 
+            trCollapseLink="collapseExample"
+            trCollapseIconColor="warning"
+            trCollapseTitle="High"
+          %}
+
+        {% for table in site.data.tableTask %}
+          {% include V2/tr-task-group.html 
+            avatar4=""
+            backlog=""
+            importantIcon=""
+          %}
+          {% include V2/tr-task-group.html 
+            avatar3=""
+            rejected=""
+            highIcon=""
+          %}
+        {% endfor %}
+
+        {% include V2/tr-group.html 
+          trCollapseLink="collapseExample"
+          trCollapseIconColor="danger"
+          trCollapseTitle="Important"
+        %}
+
+        {% include V2/tr-group.html 
+          trCollapseLink="collapseExample"
+          trCollapseIconColor="primary"
+          trCollapseTitle="Normal"
+        %}
+
+        {% include V2/tr-group.html 
+          trCollapseLink="collapseExample"
+          trCollapseIconColor="secondary"
+          trCollapseTitle="Low"
+        %}
+
+      </div>
+    <!-- END Table Resposive -->
+
+    </tbody>
+
+  </table>
